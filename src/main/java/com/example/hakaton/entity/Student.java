@@ -2,6 +2,9 @@ package com.example.hakaton.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +16,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Student {
     @Id
     @SequenceGenerator(name = "student_gen", sequenceName = "student_seq",
@@ -21,6 +25,19 @@ public class Student {
     private Long id;
     private String name;
     private String surName;
+    private String telNumber;
+    private String university;
+    private String faculty;
+    private String profession;
+    private int dateFrom;
+    private int dateTo;
+    @Column(unique = true)
+    private String email;
+    private String address;
+    @Column(name = "image", length = 1000000)
+    private byte[] image;
+    @Column(name = "diplom", length = 1000000)
+    private byte[] diplom;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @RestResource(exported = false)

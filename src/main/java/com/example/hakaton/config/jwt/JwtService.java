@@ -42,8 +42,8 @@ public class JwtService {
             UserDetails userDetails
     ) {
         return Jwts.builder()
-                .setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
+                .claim("username", userDetails.getUsername())
+                .claim("authorities", userDetails.getAuthorities())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + (10L * 24 * 60 * 60 * 1000)))
                 .signWith(getSingKey(), SignatureAlgorithm.HS256)

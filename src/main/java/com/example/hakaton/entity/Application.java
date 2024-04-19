@@ -23,7 +23,6 @@ public class Application {
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "application_gen")
     private Long id;
-
     @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne(cascade = {REFRESH, PERSIST, MERGE, DETACH})

@@ -1,0 +1,105 @@
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Java Techie Mail</title>
+    <style>
+        .main {
+            margin: 20px 30px;
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+            border: 1px solid #346EFB;
+            border-radius: 6px;
+            min-height: auto;
+            width: 37.5rem;
+
+        }
+
+        .image-holder {
+            width: 37.5rem;
+            height: 150px;
+            font-size: 48px;
+            border-bottom: 1px solid #346EFB;
+            background-color: #346EFB;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .image {
+            width: 20rem;
+            height: 138px;
+            padding: 6px 141px;
+        }
+
+        .container {
+            padding: 10px 45px;
+        }
+
+        .text-header {
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 18px;
+            line-height: 120%;
+            color: black;
+        }
+
+        .header-text {
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 150%;
+            color: #34453C;
+            padding-right: 50px;
+        }
+
+        .description {
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 150%;
+            color: #384255;
+
+        }
+
+    </style>
+</head>
+
+<body style="padding: 0; margin: 0; color: black">
+<div class="main">
+    <div class="image-holder">
+        <img  src="https://img.squadhelp.com/story_images/visual_images/1659020557-Med.Clinic.png?class=show"
+              alt="" class="image">
+    </div>
+    <div class="container">
+        <div class="text-header">
+            <p th:text="${title}" style="color: #346EFB;">Заголовок!</p>
+            <span style="color: #34453C"> Вы успешно записались на прием к специалисту.</span>
+        </div>
+        <div>
+            <div>
+                <p class="description"><span class="date-header">Отделение: </span> <span class="header-text" th:text="${department}"></span></p>
+                <p class="description"><span class="date-header">Специалист: </span> <span class="header-text" th:text="${doctor}"></span></p>
+                <p class="description"><span class="date-header">Дата приема: </span> <span class="header-text" th:text="${date}"></span></p>
+                <p class="description"><span class="date-header">Время приема: </span> <span class="header-text" th:text="${time}"></span></p>
+                <p class="description"><span class="date-header">Адрес: </span> 106452, г. Бишкек, Гражданская 119</p>
+            </div>
+               <hr>
+            <br>
+            <div>
+                <p class="description" style="color: #346EFB; font-weight: bold"><span class="date-header">Статус записи: </span> <span class="header-text" th:text="${status}"></span></p>
+                <p class="description"><span class="date-header">Дата заявки: </span> <span class="header-text" th:text="${now}"></span></p>
+                <p class="description"><span class="date-header">Пациент: </span> <span class="header-text" th:text="${patient}"></span></p>
+                <p class="description"><span class="date-header">Телефон: </span> <span class="header-text" th:text="${phoneNumber}"></span></p>
+            </div>
+            <hr>
+            <br>
+            <p class="description" style="color: #34453C">Посмотреть все свои записи вы можете в своем личном кабинете.</p>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+</body>
+</html>
