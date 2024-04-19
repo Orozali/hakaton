@@ -5,15 +5,18 @@ import com.example.hakaton.dto.request.AuthenticateRequest;
 import com.example.hakaton.dto.request.RegisterRequest;
 import com.example.hakaton.dto.response.AuthenticationResponse;
 import com.example.hakaton.service.AuthenticationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
-//@Tag(name = "Authentication API")
+@Tag(name = "Authentication API")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Validated
 public class AuthenticationApi {
@@ -21,7 +24,7 @@ public class AuthenticationApi {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/sign-up")
-    public AuthenticationResponse signUp(@RequestBody @Valid RegisterRequest request){
+    public AuthenticationResponse signUp(@ModelAttribute @Valid RegisterRequest request) throws IOException {
         return authenticationService.signUp(request);
     }
 

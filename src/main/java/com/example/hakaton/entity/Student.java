@@ -30,11 +30,11 @@ public class Student {
     private String profession;
     private int dateFrom;
     private int dateTo;
+    @Column(unique = true)
+    private String email;
     private String address;
-    @Lob
     @Column(name = "image", length = 1000000)
     private byte[] image;
-    @Lob
     @Column(name = "diplom", length = 1000000)
     private byte[] diplom;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

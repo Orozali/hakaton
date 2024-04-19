@@ -1,4 +1,18 @@
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: ilyazovorozali08@gmail.com
+    password: lbyanzfxphmogwsw
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            enable: true
+    test-connection: false
   h2:
     console:
       enabled: true
@@ -19,7 +33,6 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: ''
-
 
 jwt:
   secret-key: 66556A586E3272357538782F4125442A472D4B6150645367566B597033733676
