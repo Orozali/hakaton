@@ -7,8 +7,11 @@ import com.example.hakaton.dto.response.AuthenticationResponse;
 import com.example.hakaton.entity.Student;
 import com.example.hakaton.entity.User;
 import com.example.hakaton.entity.enums.Role;
+import com.example.hakaton.exception.exceptions.BadRequestException;
 import com.example.hakaton.exception.exceptions.MessageSendingException;
+import com.example.hakaton.exception.exceptions.NotFoundException;
 import com.example.hakaton.repository.StudentRepository;
+import com.example.hakaton.repository.UserRepository;
 import com.example.hakaton.service.AuthenticationService;
 import com.example.hakaton.utils.ImageUtils;
 import freemarker.template.Template;
@@ -20,6 +23,9 @@ import org.mapstruct.ap.shaded.freemarker.template.TemplateException;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
@@ -36,7 +42,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JavaMailSender javaMailSender;
     private final Configuration config;
     private final StudentRepository studentRepository;
+    private final UserRepository userRepository;
     private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     private static final int PASSWORD_LENGTH = 10;
 
@@ -64,6 +73,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
         sendMessage(user, request.email());
         studentRepository.save(student);
+        userRepository.save(user);
         String token = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .roles(user.getRole())
@@ -74,7 +84,24 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse signIn(AuthenticateRequest request) {
-        return null;
+        User user = userRepository.findByEmail(request.email())
+                .orElseThrow(() -> new NotFoundException(String.format("Пользователь с адресом электронной почты %s не существует", request.email())));
+
+        if(!passwordEncoder.matches(request.password(), user.getPassword())){
+            throw new BadRequestException("Неверный пароль или логин!");
+        }
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.email(),
+                        request.password()
+                )
+        );
+        String token = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .accessToken(token)
+                .roles(user.getRole())
+                .email(user.getEmail())
+                .build();
     }
 
     private void sendMessage(User user, String email){
