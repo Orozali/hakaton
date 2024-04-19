@@ -9,3 +9,4 @@ INSERT INTO Teacher (id, user_id, name, surname, department_id) VALUES (nextval(
 INSERT INTO Teacher (id, user_id, name, surname, department_id) VALUES (nextval('teacher_seq'), 2, 'Michael', 'Jakson', 1);
 INSERT INTO Teacher (id, user_id, name, surname, department_id) VALUES (nextval('teacher_seq'), 3, 'Asan', 'Asanov', 1);
 INSERT INTO Teacher (id, user_id, name, surname, department_id) VALUES (nextval('teacher_seq'), 4, 'Adil', 'Asanov', 1);
+

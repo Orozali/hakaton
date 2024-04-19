@@ -1,16 +1,16 @@
 package com.example.hakaton.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Student {
     @Id
     @SequenceGenerator(name = "student_gen", sequenceName = "student_seq",
@@ -19,6 +19,19 @@ public class Student {
     private Long id;
     private String name;
     private String surName;
+    private String telNumber;
+    private String university;
+    private String faculty;
+    private String profession;
+    private int dateFrom;
+    private int dateTo;
+    private String address;
+    @Lob
+    @Column(name = "image", length = 1000000)
+    private byte[] image;
+    @Lob
+    @Column(name = "diplom", length = 1000000)
+    private byte[] diplom;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
