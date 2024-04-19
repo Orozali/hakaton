@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 @Getter
@@ -19,6 +20,7 @@ public class Teacher {
     private Long id;
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @RestResource(exported = false)
     private User user;
     private String name;
     private String surname;

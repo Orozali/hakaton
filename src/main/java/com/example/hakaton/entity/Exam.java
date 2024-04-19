@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -25,5 +26,6 @@ public class Exam {
     private LocalTime time;
     private int duration;
     @OneToOne(mappedBy = "exam")
+    @RestResource(exported = false)
     private ExamPaper examPaper;
 }
