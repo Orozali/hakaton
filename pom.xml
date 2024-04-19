@@ -131,7 +131,7 @@
 				<version>3.3.2</version>
 				<configuration>
 					<to>
-						<image>adpsorcerer/${project.artifactId}:s1</image>
+						<image>adpsorcerer/${project.artifactId}:s9</image>
 					</to>
 				</configuration>
 			</plugin>
