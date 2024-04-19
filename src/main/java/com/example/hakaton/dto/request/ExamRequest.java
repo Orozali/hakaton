@@ -17,4 +17,5 @@ public class ExamRequest {
     private LocalDate date;
     private LocalTime time;
     private int duration;
+    private ExamPaperRequest examPaper;
 }

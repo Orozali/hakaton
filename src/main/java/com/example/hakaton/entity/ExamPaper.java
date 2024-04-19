@@ -1,5 +1,6 @@
 package com.example.hakaton.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,5 +23,6 @@ public class ExamPaper {
     @OneToOne()
     @JoinColumn(name = "exam_id", referencedColumnName = "id")
     @RestResource(exported = false)
+    @JsonIgnore
     private Exam exam;
 }
