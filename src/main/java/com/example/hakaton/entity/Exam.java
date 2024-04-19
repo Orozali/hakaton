@@ -10,6 +10,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,4 +31,12 @@ public class Exam {
     @RestResource(exported = false)
     @JsonIgnore
     private ExamPaper examPaper;
+    @OneToMany(mappedBy = "exam")
+    @RestResource(exported = false)
+    @JsonIgnore
+    private List<Form> forms;
+    @OneToMany(mappedBy = "exam")
+    @RestResource(exported = false)
+    @JsonIgnore
+    List<Teacher> teachers;
 }

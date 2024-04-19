@@ -29,4 +29,9 @@ public class Teacher {
     @ManyToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
+    @ManyToOne()
+    @JoinColumn(name = "exam_id", referencedColumnName = "id")
+    @RestResource(exported = false)
+    @JsonIgnore
+    private Exam exam;
 }

@@ -1,7 +1,9 @@
 package com.example.hakaton.mapper;
 
 import com.example.hakaton.dto.request.ExamRequest;
+import com.example.hakaton.dto.request.FormRequest;
 import com.example.hakaton.entity.Exam;
+import com.example.hakaton.entity.Form;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -19,4 +21,5 @@ public interface ModelMapper {
     default byte[] getBytes(MultipartFile file) throws IOException {
         return file != null ? file.getBytes() : null;
     }
+    Form toForm(FormRequest formRequest);
 }

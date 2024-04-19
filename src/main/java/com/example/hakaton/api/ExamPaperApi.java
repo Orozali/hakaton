@@ -5,10 +5,7 @@ import com.example.hakaton.service.IExamPaperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/examPaper")
@@ -16,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExamPaperApi {
     private final IExamPaperService examPaperService;
     @PostMapping()
-    public ResponseEntity<?> createExamPaper(@RequestBody ExamRequest exam) {
+    public ResponseEntity<?> createExamPaper(@ModelAttribute ExamRequest exam) {
         examPaperService.createExamPaper(exam);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
