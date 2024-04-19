@@ -4,8 +4,8 @@ import com.example.hakaton.entity.enums.Role;
 import lombok.Builder;
 
 @Builder
-public record AuthenticationResponse(
-        String email,
+public record AuthorizationResponse(
+        UserResponse user,
         Role roles,
         String accessToken
 ) {

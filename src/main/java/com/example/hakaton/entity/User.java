@@ -43,6 +43,13 @@ public class User  implements UserDetails {
         return List.of(new SimpleGrantedAuthority(this.role.name()));
     }
 
+    public Student getStudent() {
+        if(this.student == null){
+            return new Student();
+        }
+        return this.student;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

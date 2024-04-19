@@ -49,4 +49,6 @@ public class Student {
     @RestResource(exported = false)
     @JsonIgnore
     private List<Application> applications;
+
+
 }
