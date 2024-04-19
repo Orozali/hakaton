@@ -21,9 +21,9 @@ import java.util.List;
 @Table(name = "users")
 public class User  implements UserDetails {
     @Id
-    @SequenceGenerator(name = "student_gen", sequenceName = "student_seq",
+    @SequenceGenerator(name = "user_gen", sequenceName = "user_seq",
             allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
     private Long id;
     private String email;
     private String password;
