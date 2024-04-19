@@ -1,5 +1,8 @@
 package com.example.hakaton.config.jwt;
 
+import com.example.hakaton.entity.User;
+import com.example.hakaton.exception.exceptions.NotFoundException;
+import com.example.hakaton.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -8,6 +11,8 @@ import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +28,7 @@ import java.util.function.Function;
 public class JwtService {
     @Value("${jwt.secret-key}")
     private String SECRET_KEY;
+    private final UserRepository userRepository;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -77,12 +83,12 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-//    public User getAuthenticate(){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String login = authentication.getName();
-//        return userRepository.findByEmail(login).orElseThrow(() -> {
-//            log.error("User not found!");
-//            return new NotFoundException("User not found!");
-//        });
-//    }
+    public User getAuthenticate(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = authentication.getName();
+        return userRepository.findByEmail(login).orElseThrow(() -> {
+            log.error("User not found!");
+            return new NotFoundException("User not found!");
+        });
+    }
 }

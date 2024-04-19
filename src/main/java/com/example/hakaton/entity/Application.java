@@ -2,10 +2,7 @@ package com.example.hakaton.entity;
 
 import com.example.hakaton.entity.enums.Status;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ import static jakarta.persistence.CascadeType.DETACH;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Application {
     @Id
     @SequenceGenerator(name = "application_gen", sequenceName = "application_seq",

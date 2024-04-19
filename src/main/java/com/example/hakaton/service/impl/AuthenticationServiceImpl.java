@@ -4,12 +4,16 @@ import com.example.hakaton.config.jwt.JwtService;
 import com.example.hakaton.dto.request.AuthenticateRequest;
 import com.example.hakaton.dto.request.RegisterRequest;
 import com.example.hakaton.dto.response.AuthenticationResponse;
+import com.example.hakaton.dto.response.UserResponse;
+import com.example.hakaton.entity.Application;
 import com.example.hakaton.entity.Student;
 import com.example.hakaton.entity.User;
 import com.example.hakaton.entity.enums.Role;
+import com.example.hakaton.entity.enums.Status;
 import com.example.hakaton.exception.exceptions.BadRequestException;
 import com.example.hakaton.exception.exceptions.MessageSendingException;
 import com.example.hakaton.exception.exceptions.NotFoundException;
+import com.example.hakaton.repository.ApplicationRepository;
 import com.example.hakaton.repository.StudentRepository;
 import com.example.hakaton.repository.UserRepository;
 import com.example.hakaton.service.AuthenticationService;
@@ -46,6 +50,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final ApplicationRepository applicationRepository;
 
     private static final int PASSWORD_LENGTH = 10;
 
@@ -64,6 +69,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .dateTo(request.dateTo())
                 .image(request.image().getBytes())
                 .diplom(request.diploma().getBytes())
+                .email(request.email())
                 .build();
 
         com.example.hakaton.entity.User user = com.example.hakaton.entity.User.builder()
@@ -71,14 +77,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .role(Role.STUDENT)
                 .email(request.email())
                 .build();
+        student.setUser(user);
         sendMessage(user, request.email());
         studentRepository.save(student);
         userRepository.save(user);
+        Application application = Application.builder()
+                .status(Status.PENDING)
+                .student(student)
+                .build();
+        applicationRepository.save(application);
         String token = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .roles(user.getRole())
                 .accessToken(token)
-                .email(user.getEmail())
+                .user(UserResponse.builder().build())
                 .build();
     }
 
@@ -100,7 +112,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(token)
                 .roles(user.getRole())
-                .email(user.getEmail())
+                .user(UserResponse.builder().build())
                 .build();
     }
 
