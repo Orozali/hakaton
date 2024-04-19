@@ -18,6 +18,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "users")
 public class User  implements UserDetails {
     @Id
     @SequenceGenerator(name = "student_gen", sequenceName = "student_seq",
@@ -28,9 +29,9 @@ public class User  implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToOne()
+    @OneToOne(mappedBy = "user")
     private Student student;
-    @OneToOne()
+    @OneToOne(mappedBy = "user")
     private Teacher teacher;
 
     @Override
