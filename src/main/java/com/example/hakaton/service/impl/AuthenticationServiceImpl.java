@@ -4,6 +4,7 @@ import com.example.hakaton.config.jwt.JwtService;
 import com.example.hakaton.dto.request.AuthenticateRequest;
 import com.example.hakaton.dto.request.RegisterRequest;
 import com.example.hakaton.dto.response.AuthenticationResponse;
+import com.example.hakaton.dto.response.AuthorizationResponse;
 import com.example.hakaton.dto.response.UserResponse;
 import com.example.hakaton.entity.Application;
 import com.example.hakaton.entity.Student;
@@ -90,12 +91,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return AuthenticationResponse.builder()
                 .roles(user.getRole())
                 .accessToken(token)
-                .user(UserResponse.builder().build())
+                .email(user.getEmail())
                 .build();
     }
 
     @Override
-    public AuthenticationResponse signIn(AuthenticateRequest request) {
+    public AuthorizationResponse signIn(AuthenticateRequest request) throws IOException {
         User user = userRepository.findByEmail(request.email())
                 .orElseThrow(() -> new NotFoundException(String.format("Пользователь с адресом электронной почты %s не существует", request.email())));
 
@@ -108,17 +109,33 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         request.password()
                 )
         );
+        Student student = user.getStudent();
+        UserResponse userResponse = UserResponse.builder()
+                .id(student.getId())
+                .name(student.getName())
+                .surName(student.getSurName())
+                .faculty(student.getFaculty())
+                .email(student.getEmail())
+                .address(student.getAddress())
+                .profession(student.getProfession())
+                .telNumber(student.getTelNumber())
+                .image(ImageUtils.getBase64Image(student.getImage()))
+                .diplom(ImageUtils.getBase64Image(student.getDiplom()))
+                .dateFrom(student.getDateFrom())
+                .dateTo(student.getDateTo())
+                .university(student.getUniversity())
+                .build();
         String token = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
+        return AuthorizationResponse.builder()
                 .accessToken(token)
                 .roles(user.getRole())
-                .user(UserResponse.builder().build())
+                .user(userResponse)
                 .build();
     }
 
     private void sendMessage(User user, String email){
         String uniqueCode = generatePassword();
-        user.setPassword(uniqueCode);
+        user.setPassword(passwordEncoder.encode(uniqueCode));
         Map<String, Object> model = new HashMap<>();
         model.put("code", uniqueCode);
 

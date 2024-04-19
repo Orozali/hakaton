@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Admission Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        .approved {
+            color: green;
+        }
+        .rejected {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Статус поступления в университет</h2>
+    <p>Здраствуйте ${name},</p>
+    <p>Мы пишем, чтобы сообщить вам о статусе вашего поступления в ${university}.</p>
+    <p>Ваша заявка была:</p>
+    <p class="[status]">${status}</p>
+    <p>Если вас одобрили, поздравляем! Мы с нетерпением ждем возможности приветствовать Вас в нашем университетском сообществе..</p>
+    <p>Если вам было отказано, мы рекомендуем вам изучить другие возможности и желаем вам удачи в ваших будущих начинаниях..</p>
+    <p>Спасибо за ваш интерес к университету ${university}.</p>
+    <p>Искренне,</p>
+    <p>Приемная комиссия</p>
+</div>
+</body>
+</html>

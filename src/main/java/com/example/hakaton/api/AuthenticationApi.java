@@ -4,6 +4,7 @@ import com.example.hakaton.config.jwt.JwtService;
 import com.example.hakaton.dto.request.AuthenticateRequest;
 import com.example.hakaton.dto.request.RegisterRequest;
 import com.example.hakaton.dto.response.AuthenticationResponse;
+import com.example.hakaton.dto.response.AuthorizationResponse;
 import com.example.hakaton.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -29,7 +30,7 @@ public class AuthenticationApi {
     }
 
     @PostMapping("/sign-in")
-    public AuthenticationResponse signIn(@RequestBody @Valid AuthenticateRequest request){
+    public AuthorizationResponse signIn(@RequestBody @Valid AuthenticateRequest request) throws IOException {
         return authenticationService.signIn(request);
     }
 
