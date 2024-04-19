@@ -13,9 +13,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ExamPaper {
     @Id
-    @SequenceGenerator(name = "exam_gen", sequenceName = "exam_seq",
+    @SequenceGenerator(name = "exam_paper_gen", sequenceName = "exam_paper_seq",
             allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "exam_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "exam_paper_gen")
     private Long id;
 
     @OneToOne()

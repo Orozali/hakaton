@@ -10,7 +10,7 @@ spring:
     show-sql: true
   sql:
     init:
-      data-locations: templates/data_init.sql
+      data-locations: classpath:templates/data_init.sql
       mode: always
   application:
     name: hakaton
