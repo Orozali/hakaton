@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 @Getter
@@ -20,5 +21,6 @@ public class ExamPaper {
 
     @OneToOne()
     @JoinColumn(name = "exam_id", referencedColumnName = "id")
+    @RestResource(exported = false)
     private Exam exam;
 }

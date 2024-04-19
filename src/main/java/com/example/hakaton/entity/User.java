@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,8 +31,10 @@ public class User  implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToOne(mappedBy = "user")
+    @RestResource(exported = false)
     private Student student;
     @OneToOne(mappedBy = "user")
+    @RestResource(exported = false)
     private Teacher teacher;
 
     @Override
