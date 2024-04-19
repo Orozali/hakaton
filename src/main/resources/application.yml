@@ -29,6 +29,9 @@ spring:
   application:
     name: hakaton
   datasource:
+#    url: jdbc:postgresql://google/hakaton?cloudSqlInstance=hakaton-420820:us-central1:hakaton&socketFactory=com.google.cloud.sql.postgres.SocketFactory&user=postgres&password=Orozali2003
+#    username: postgres
+#    password: Orozali2003
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
     username: sa

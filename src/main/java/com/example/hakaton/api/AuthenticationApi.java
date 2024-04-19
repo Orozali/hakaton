@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/auth")
 @Tag(name = "Authentication API")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Validated

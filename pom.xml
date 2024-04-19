@@ -49,6 +49,12 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>com.google.cloud.sql</groupId>
+			<artifactId>postgres-socket-factory</artifactId>
+			<version>1.15.2</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
