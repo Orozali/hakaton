@@ -18,7 +18,7 @@ public class ExamPaper {
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "exam_paper_gen")
     private Long id;
-
+    private byte[] file;
     @OneToOne()
     @JoinColumn(name = "exam_id", referencedColumnName = "id")
     @RestResource(exported = false)
