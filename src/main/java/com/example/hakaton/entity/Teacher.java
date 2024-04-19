@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -34,4 +36,6 @@ public class Teacher {
     @RestResource(exported = false)
     @JsonIgnore
     private Exam exam;
+    @OneToMany(mappedBy = "teacher")
+    private List<FormGrade> formGrades;
 }

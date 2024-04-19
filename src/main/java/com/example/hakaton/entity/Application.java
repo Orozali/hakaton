@@ -31,4 +31,6 @@ public class Application {
     private Student student;
     @OneToOne(mappedBy = "application")
     private ExamAnswer examAnswers;
+    @OneToOne(mappedBy = "application")
+    private FormGrade formGrade;
 }
