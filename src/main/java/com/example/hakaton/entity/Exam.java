@@ -1,5 +1,6 @@
 package com.example.hakaton.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +26,8 @@ public class Exam {
     private LocalDate date;
     private LocalTime time;
     private int duration;
-    @OneToOne(mappedBy = "exam")
+    @OneToOne(mappedBy = "exam", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     @RestResource(exported = false)
+    @JsonIgnore
     private ExamPaper examPaper;
 }

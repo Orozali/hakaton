@@ -1,6 +1,7 @@
 package com.example.hakaton.entity;
 
 import com.example.hakaton.entity.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,9 +33,11 @@ public class User  implements UserDetails {
     private Role role;
     @OneToOne(mappedBy = "user")
     @RestResource(exported = false)
+    @JsonIgnore
     private Student student;
     @OneToOne(mappedBy = "user")
     @RestResource(exported = false)
+    @JsonIgnore
     private Teacher teacher;
 
     @Override

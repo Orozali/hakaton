@@ -1,5 +1,6 @@
 package com.example.hakaton.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Teacher {
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @RestResource(exported = false)
+    @JsonIgnore
     private User user;
     private String name;
     private String surname;
