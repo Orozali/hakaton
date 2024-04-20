@@ -13,9 +13,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FormGrade {
     @Id
-    @SequenceGenerator(name = "application_gen", sequenceName = "application_seq",
+    @SequenceGenerator(name = "form_grade_gen", sequenceName = "form_grade_seq",
             allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "application_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "form_grade_gen")
     private Long id;
     @OneToOne()
     @JoinColumn(name = "application_id", referencedColumnName = "id")

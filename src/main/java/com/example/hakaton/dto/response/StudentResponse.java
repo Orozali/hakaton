@@ -16,6 +16,6 @@ public record StudentResponse(
          String email,
          String address,
          String image,
-         String diplom
+         String diploma
 ) {
 }

@@ -76,8 +76,6 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public List<ApplicationResponse> getAllApplication() {
-        User user = jwtService.getAuthenticate();
-        System.out.println(user.getRole()+"dfd");
         List<ApplicationResponse> responses = new ArrayList<>();
         applicationRepository.findAll()
                 .forEach(application ->{
@@ -110,7 +108,7 @@ public class ApplicationServiceImpl implements ApplicationService {
                 .profession(student.getProfession())
                 .telNumber(student.getTelNumber())
                 .image(ImageUtils.getBase64Image(student.getImage()))
-                .diplom(ImageUtils.getBase64Image(student.getDiplom()))
+                .diploma(ImageUtils.getBase64Image(student.getDiploma()))
                 .dateFrom(student.getDateFrom())
                 .dateTo(student.getDateTo())
                 .university(student.getUniversity())

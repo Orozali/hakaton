@@ -8,10 +8,11 @@ import jakarta.validation.constraints.Pattern;
 import org.springframework.web.multipart.MultipartFile;
 
 public record RegisterRequest(
+        Long departmentId,
         @NotBlank(message = "Name is required") String name,
         @NotBlank(message = "Surname is required") String surName,
         @NotBlank(message = "Telephone number is required")
-        @Pattern(regexp = "\\d{10}", message = "Telephone number must be 10 digits") String telNumber,
+        String telNumber,
         @NotBlank(message = "This field should't be empty")
         @EmailValid(message = "Пользователь с таким адресом электронной почты уже существует!")
         String email,
