@@ -36,4 +36,8 @@ public class Application {
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     @RestResource(exported = false)
     private Department department;
+    @ManyToOne
+    @JoinColumn(name = "exam_id", referencedColumnName = "id")
+    @RestResource(exported = false)
+    private Exam exam;
 }
