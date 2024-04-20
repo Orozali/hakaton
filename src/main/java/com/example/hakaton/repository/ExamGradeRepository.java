@@ -1,4 +1,9 @@
 package com.example.hakaton.repository;
 
-public interface ExamGradeRepository {
+import com.example.hakaton.entity.ExamGrade;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ExamGradeRepository extends JpaRepository<ExamGrade, Long> {
 }

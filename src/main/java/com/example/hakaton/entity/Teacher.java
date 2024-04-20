@@ -38,4 +38,6 @@ public class Teacher {
     private Exam exam;
     @OneToMany(mappedBy = "teacher")
     private List<FormGrade> formGrades;
+    @OneToOne(mappedBy = "teacher")
+    private ExamGrade examGrade;
 }

@@ -22,4 +22,6 @@ public class ExamAnswer {
     @JoinColumn(name = "application_id", referencedColumnName = "id")
     private Application application;
     private byte[] image;
+    @OneToOne(mappedBy = "examAnswer")
+    private ExamGrade examGrade;
 }
