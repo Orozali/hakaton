@@ -29,7 +29,7 @@ public class Application {
     @JoinColumn(name = "student_id")
     private Student student;
     @OneToOne(mappedBy = "application")
-    private ExamAnswer examAnswers;
+    private ExamAnswer examAnswer;
     @OneToOne(mappedBy = "application")
     private FormGrade formGrade;
 }

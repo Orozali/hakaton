@@ -41,8 +41,6 @@ public class Student {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     @OneToOne(mappedBy = "student", fetch = FetchType.EAGER)
-    @RestResource(exported = false)
-    @JsonIgnore
     private Application application;
 
 

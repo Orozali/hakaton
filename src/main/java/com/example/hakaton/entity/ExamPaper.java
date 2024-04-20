@@ -22,7 +22,5 @@ public class ExamPaper {
     private byte[] file;
     @OneToOne()
     @JoinColumn(name = "exam_id", referencedColumnName = "id")
-    @RestResource(exported = false)
-    @JsonIgnore
     private Exam exam;
 }
