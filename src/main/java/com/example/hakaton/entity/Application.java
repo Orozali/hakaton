@@ -1,8 +1,10 @@
 package com.example.hakaton.entity;
 
 import com.example.hakaton.entity.enums.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class Application {
     private Long id;
     @Enumerated(EnumType.STRING)
     private Status status;
-    @OneToOne(cascade = ALL)
+    @OneToOne(cascade = {REFRESH, PERSIST, MERGE, DETACH})
     @JoinColumn(name = "student_id")
     private Student student;
     @OneToOne(mappedBy = "application")

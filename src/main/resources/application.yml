@@ -29,16 +29,14 @@ spring:
   application:
     name: hakaton
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-#    url: jdbc:postgresql://google/postgres?cloudSqlInstance=hakaton-420820:us-central1:hakaton&socketFactory=com.google.cloud.sql.postgres.SocketFactory&user=postgres&password=Orozali2003
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: Orozali2003
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ''
 #    url: jdbc:h2:mem:testdb
 #    driverClassName: org.h2.Driver
 #    username: sa
 #    password: ''
 
-#jdbc:postgresql://google/medclinic?cloudSqlInstance=medclinic-420017:us-central1:medclinic&socketFactory=com.google.cloud.sql.postgres.SocketFactory&user=postgres&password=Orozali2003
 jwt:
   secret-key: 66556A586E3272357538782F4125442A472D4B6150645367566B597033733676

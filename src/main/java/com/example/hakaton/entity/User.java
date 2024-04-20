@@ -29,9 +29,7 @@ public class User  implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToOne(mappedBy = "user")
-    @RestResource(exported = false)
-    @JsonIgnore
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     private Student student;
     @OneToOne(mappedBy = "user")
     @RestResource(exported = false)

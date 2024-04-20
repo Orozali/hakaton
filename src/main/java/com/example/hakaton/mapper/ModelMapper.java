@@ -1,8 +1,10 @@
 package com.example.hakaton.mapper;
 
+import com.example.hakaton.dto.request.ExamAnswerRequest;
 import com.example.hakaton.dto.request.ExamRequest;
 import com.example.hakaton.dto.request.FormRequest;
 import com.example.hakaton.entity.Exam;
+import com.example.hakaton.entity.ExamAnswer;
 import com.example.hakaton.entity.Form;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -22,4 +24,6 @@ public interface ModelMapper {
         return file != null ? file.getBytes() : null;
     }
     Form toForm(FormRequest formRequest);
+    @Mapping(source = "multipartFile", target = "image", qualifiedByName = "getBytes")
+    ExamAnswer toExamAnswer(ExamAnswerRequest examAnswerRequest);
 }
