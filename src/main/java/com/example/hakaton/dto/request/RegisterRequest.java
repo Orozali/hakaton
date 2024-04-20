@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import org.springframework.web.multipart.MultipartFile;
 
 public record RegisterRequest(
-        Long departmentId,
+        String departmentId,
         @NotBlank(message = "Name is required") String name,
         @NotBlank(message = "Surname is required") String surName,
         @NotBlank(message = "Telephone number is required")

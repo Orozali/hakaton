@@ -4,6 +4,7 @@ import com.example.hakaton.dto.request.ApplicationRequest;
 import com.example.hakaton.dto.response.ApplicationResponse;
 import com.example.hakaton.dto.response.SimpleResponse;
 import com.example.hakaton.dto.response.StudentResponse;
+import com.example.hakaton.entity.Application;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,4 +15,5 @@ public interface ApplicationService {
     List<ApplicationResponse> getAllApplication();
 
     StudentResponse getApplicationById(Long applicationId) throws IOException;
+    List<Application> getRatings(Long examId);
 }

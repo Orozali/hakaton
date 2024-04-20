@@ -56,7 +56,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse signUp(RegisterRequest request) throws IOException {
-        Department department = departmentRepository.findById(request.departmentId())
+        Long id = Long.parseLong(request.departmentId());
+        Department department = departmentRepository.findById(id)
                 .orElseThrow();
         Student student = Student.builder()
                 .name(request.name())

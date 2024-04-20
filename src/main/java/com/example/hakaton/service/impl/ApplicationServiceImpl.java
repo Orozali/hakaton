@@ -6,12 +6,14 @@ import com.example.hakaton.dto.response.ApplicationResponse;
 import com.example.hakaton.dto.response.SimpleResponse;
 import com.example.hakaton.dto.response.StudentResponse;
 import com.example.hakaton.entity.Application;
+import com.example.hakaton.entity.Exam;
 import com.example.hakaton.entity.Student;
 import com.example.hakaton.entity.User;
 import com.example.hakaton.entity.enums.Status;
 import com.example.hakaton.exception.exceptions.MessageSendingException;
 import com.example.hakaton.exception.exceptions.NotFoundException;
 import com.example.hakaton.repository.ApplicationRepository;
+import com.example.hakaton.repository.ExamRepository;
 import com.example.hakaton.service.ApplicationService;
 import com.example.hakaton.utils.ImageUtils;
 import freemarker.template.Configuration;
@@ -37,10 +39,21 @@ import java.util.Map;
 public class ApplicationServiceImpl implements ApplicationService {
 
     private final ApplicationRepository applicationRepository;
+    private final ExamRepository examRepository;
     private final JavaMailSender javaMailSender;
     private final Configuration config;
     private final JwtService jwtService;
 
+    @Override
+    public List<Application> getRatings(Long examId) {
+        Exam exam = examRepository.findById(examId).orElseThrow();
+        List<Application> applications = exam.getApplications();
+        applications.forEach(application -> application.setRating(
+                (short)(((application.getFormGrade().getGrade()) + (application.getExamAnswer().getExamGrade().getGrade())) / 2)
+        ));
+        applicationRepository.saveAll(applications);
+        return applications;
+    }
 
     @Override
     public SimpleResponse approve(ApplicationRequest request) {

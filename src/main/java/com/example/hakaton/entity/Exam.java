@@ -37,8 +37,9 @@ public class Exam {
     @RestResource(exported = false)
     @JsonIgnore
     List<Teacher> teachers;
-    @OneToMany(mappedBy = "exam")
+    @OneToMany(mappedBy = "exam", fetch = FetchType.EAGER)
     @RestResource(exported = false)
     @JsonIgnore
     List<Application> applications;
+
 }

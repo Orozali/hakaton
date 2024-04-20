@@ -14,9 +14,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ExamGrade {
     @Id
-    @SequenceGenerator(name = "exam_answer_gen", sequenceName = "exam_answer_seq",
+    @SequenceGenerator(name = "exam_grade_gen", sequenceName = "exam_grade_seq",
             allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "exam_answer_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "exam_grade_gen")
     private Long id;
     private short grade;
     private String feedback;

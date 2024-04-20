@@ -19,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/application")
 @Tag(name = "Application API")
-@CrossOrigin(origins = "*", maxAge = 3600)
 @Validated
 public class ApplicationApi {
 

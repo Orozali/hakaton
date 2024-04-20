@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/formGrade")
 @Tag(name = "Form Grade API")
-@CrossOrigin(origins = "*", maxAge = 3600)
 @Validated
 public class FormGradeApi {
     private final FormGradeService formGradeService;

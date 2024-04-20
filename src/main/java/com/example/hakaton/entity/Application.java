@@ -40,4 +40,6 @@ public class Application {
     @JoinColumn(name = "exam_id", referencedColumnName = "id")
     @RestResource(exported = false)
     private Exam exam;
+    @Column(nullable = true)
+    private short rating;
 }
