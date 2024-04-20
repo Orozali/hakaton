@@ -4,6 +4,7 @@ import com.example.hakaton.config.jwt.JwtService;
 import com.example.hakaton.entity.Application;
 import com.example.hakaton.entity.FormGrade;
 import com.example.hakaton.entity.Teacher;
+import com.example.hakaton.exception.exceptions.BadRequestException;
 import com.example.hakaton.repository.ApplicationRepository;
 import com.example.hakaton.repository.FormGradeRepository;
 import com.example.hakaton.repository.FormRepository;
@@ -23,13 +24,16 @@ public class FormGradeServiceImpl implements FormGradeService {
         Teacher teacher =  jwtService.getAuthenticate().getTeacher();
         Application application = applicationRepository.findById(applicationId)
                 .orElseThrow();
-        var formGrade = FormGrade.builder()
-                .grade(grade)
-                .application(application)
-                .teacher(teacher)
-                .build();
-        application.setFormGrade(formGrade);
-        formGradeRepository.save(formGrade);
-        applicationRepository.save(application);
+        if(application.getFormGrade() == null){
+            var formGrade = FormGrade.builder()
+                    .grade(grade)
+                    .application(application)
+                    .teacher(teacher)
+                    .build();
+            application.setFormGrade(formGrade);
+            formGradeRepository.save(formGrade);
+            applicationRepository.save(application);
+        }
+        throw new BadRequestException("Application with this id already has his own grade");
     }
 }
