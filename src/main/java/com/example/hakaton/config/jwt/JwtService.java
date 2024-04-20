@@ -16,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,7 +33,14 @@ public class JwtService {
     private final UserRepository userRepository;
 
     public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+//        return extractClaim(token, Claims::getSubject);
+        SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return String.valueOf(claims.get("username"));
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -52,7 +61,7 @@ public class JwtService {
                 .claim("authorities", userDetails.getAuthorities())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + (10L * 24 * 60 * 60 * 1000)))
-                .signWith(getSingKey(), SignatureAlgorithm.HS256)
+                .signWith(getSingKey())
                 .compact();
     }
 
@@ -79,8 +88,9 @@ public class JwtService {
     }
 
     private Key getSingKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
-        return Keys.hmacShaKeyFor(keyBytes);
+//        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+//        return Keys.hmacShaKeyFor(keyBytes);
+        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
     }
 
     public User getAuthenticate(){

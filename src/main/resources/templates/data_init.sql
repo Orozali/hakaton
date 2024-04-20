@@ -16,7 +16,12 @@ INSERT INTO Teacher (id, user_id, name, surname, department_id) VALUES (nextval(
 --        ( 2020, 2025, nextval('student_seq'), 3, null, null, 'Adress', '2004.01033@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' ),
 --        ( 2020, 2025, nextval('student_seq'), 4, null, null, 'Adress', '2004.01034@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' );
 
+INSERT INTO Users (id, email, password, role) VALUES (nextval('user_seq'), 'stud1@gmail.com', '$2a$12$xW0toPA2AchEJ.deBxnmcuaDR/1kD6cWd9IbVkO7.3.o374DjkqaO', 'STUDENT');
+INSERT INTO Users (id, email, password, role) VALUES (nextval('user_seq'), 'stud2@gmail.com', '$2a$12$xW0toPA2AchEJ.deBxnmcuaDR/1kD6cWd9IbVkO7.3.o374DjkqaO', 'STUDENT');
 
+INSERT INTO Student (user_id, date_from, date_to, id, diplom, image, address, email, faculty, name, profession, sur_name, tel_number, university)
+VALUES (5, 2020, 2025, nextval('student_seq'), null, null, 'Adress', '2004.01031@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' ),
+       (6, 2020, 2025, nextval('student_seq'), null, null, 'Adress', '2004.01034@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' );
 
 
 

@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,13 +39,11 @@ public class Student {
     private byte[] diplom;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @RestResource(exported = false)
-    @JsonIgnore
     private User user;
-    @OneToMany(mappedBy = "student")
+    @OneToOne(mappedBy = "student", fetch = FetchType.EAGER)
     @RestResource(exported = false)
     @JsonIgnore
-    private List<Application> applications;
+    private Application application;
 
 
 }
