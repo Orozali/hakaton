@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 @Getter
@@ -13,9 +14,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ExamAnswer {
     @Id
-    @SequenceGenerator(name = "application_gen", sequenceName = "application_seq",
+    @SequenceGenerator(name = "exam_answer_gen", sequenceName = "exam_answer_seq",
             allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "application_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "exam_answer_gen")
     private Long id;
     @OneToOne()
     @JoinColumn(name = "application_id", referencedColumnName = "id")

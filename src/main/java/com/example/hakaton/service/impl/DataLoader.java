@@ -30,42 +30,42 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        int count = 2000;
-        for (int i = 0; i < 5; i++) {
-            String email = ++count + ".0101@manas.edu.kg";
-            Student student = createStudent(email);
-            Application application = Application.builder()
-                    .status(Status.PENDING)
-                    .student(student)
-                    .build();
-
-            applicationRepository.save(application);
-            studentRepository.save(student);
-        }
+//        int count = 2000;
+//        for (int i = 0; i < 5; i++) {
+//            String email = ++count + ".0101@manas.edu.kg";
+//            Student student = createStudent(email);
+//            Application application = Application.builder()
+//                    .status(Status.PENDING)
+//                    .student(student)
+//                    .build();
+//
+//            applicationRepository.save(application);
+//            studentRepository.save(student);
+//        }
     }
 
-    private Student createStudent(String email) throws IOException {
-        byte[] imageBytes = getImageBytes("static/img/student.png");
-        byte[] diplomaBytes = getImageBytes("static/img/diploma.jpeg");
+//    private Student createStudent(String email) throws IOException {
+//        byte[] imageBytes = getImageBytes("static/img/student.png");
+//        byte[] diplomaBytes = getImageBytes("static/img/diploma.jpeg");
+//
+//        return Student.builder()
+//                .name("John")
+//                .surName("Doe")
+//                .telNumber("+996551553552")
+//                .university("Example University")
+//                .faculty("Computer Science")
+//                .profession("Software Engineer")
+//                .dateFrom(2018)
+//                .dateTo(2022)
+//                .email(email)
+//                .address("123 Example St, Example City")
+//                .image(imageBytes)
+//                .diplom(diplomaBytes)
+//                .build();
+//    }
 
-        return Student.builder()
-                .name("John")
-                .surName("Doe")
-                .telNumber("+996551553552")
-                .university("Example University")
-                .faculty("Computer Science")
-                .profession("Software Engineer")
-                .dateFrom(2018)
-                .dateTo(2022)
-                .email(email)
-                .address("123 Example St, Example City")
-                .image(imageBytes)
-                .diplom(diplomaBytes)
-                .build();
-    }
-
-    private byte[] getImageBytes(String filePath) throws IOException {
-        Resource resource = resourceLoader.getResource("classpath:" + filePath);
-        return Files.readAllBytes(resource.getFile().toPath());
-    }
+//    private byte[] getImageBytes(String filePath) throws IOException {
+//        Resource resource = resourceLoader.getResource("classpath:" + filePath);
+//        return Files.readAllBytes(resource.getFile().toPath());
+//    }
 }

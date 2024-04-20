@@ -32,4 +32,8 @@ public class Application {
     private ExamAnswer examAnswers;
     @OneToOne(mappedBy = "application")
     private FormGrade formGrade;
+    @ManyToOne
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    @RestResource(exported = false)
+    private Department department;
 }

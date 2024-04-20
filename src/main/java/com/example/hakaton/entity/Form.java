@@ -15,9 +15,9 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @NoArgsConstructor
 public class Form {
     @Id
-    @SequenceGenerator(name = "application_gen", sequenceName = "application_seq",
+    @SequenceGenerator(name = "form_gen", sequenceName = "form_seq",
             allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "application_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "form_gen")
     private Long id;
     @ManyToOne()
     @JoinColumn(name = "exam_id", referencedColumnName = "id")

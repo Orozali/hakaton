@@ -36,7 +36,7 @@ public class Student {
     @Column(name = "image", length = 1000000)
     private byte[] image;
     @Column(name = "diplom", length = 1000000)
-    private byte[] diplom;
+    private byte[] diploma;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;

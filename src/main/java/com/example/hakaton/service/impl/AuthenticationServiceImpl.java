@@ -6,15 +6,14 @@ import com.example.hakaton.dto.request.RegisterRequest;
 import com.example.hakaton.dto.response.AuthenticationResponse;
 import com.example.hakaton.dto.response.AuthorizationResponse;
 import com.example.hakaton.dto.response.StudentResponse;
-import com.example.hakaton.entity.Application;
-import com.example.hakaton.entity.Student;
-import com.example.hakaton.entity.User;
+import com.example.hakaton.entity.*;
 import com.example.hakaton.entity.enums.Role;
 import com.example.hakaton.entity.enums.Status;
 import com.example.hakaton.exception.exceptions.BadRequestException;
 import com.example.hakaton.exception.exceptions.MessageSendingException;
 import com.example.hakaton.exception.exceptions.NotFoundException;
 import com.example.hakaton.repository.ApplicationRepository;
+import com.example.hakaton.repository.DepartmentRepository;
 import com.example.hakaton.repository.StudentRepository;
 import com.example.hakaton.repository.UserRepository;
 import com.example.hakaton.service.AuthenticationService;
@@ -50,12 +49,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final ApplicationRepository applicationRepository;
+    private final DepartmentRepository departmentRepository;
 
     private static final int PASSWORD_LENGTH = 10;
 
 
     @Override
     public AuthenticationResponse signUp(RegisterRequest request) throws IOException {
+        Department department = departmentRepository.findById(request.departmentId())
+                .orElseThrow();
         Student student = Student.builder()
                 .name(request.name())
                 .surName(request.surName())
@@ -67,7 +69,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .dateFrom(request.dateFrom())
                 .dateTo(request.dateTo())
                 .image(request.image().getBytes())
-                .diplom(request.diploma().getBytes())
+                .diploma(request.diploma().getBytes())
                 .email(request.email())
                 .build();
 
@@ -83,6 +85,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         Application application = Application.builder()
                 .status(Status.PENDING)
                 .student(student)
+                .department(department)
                 .build();
         applicationRepository.save(application);
         String token = jwtService.generateToken(user);
@@ -107,28 +110,50 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         request.password()
                 )
         );
-        Student student = user.getStudent();
-        StudentResponse studentResponse = StudentResponse.builder()
-                .id(student.getId())
-                .name(student.getName())
-                .surName(student.getSurName())
-                .faculty(student.getFaculty())
-                .email(student.getEmail())
-                .address(student.getAddress())
-                .profession(student.getProfession())
-                .telNumber(student.getTelNumber())
-                .image(ImageUtils.getBase64Image(student.getImage()))
-                .diplom(ImageUtils.getBase64Image(student.getDiplom()))
-                .dateFrom(student.getDateFrom())
-                .dateTo(student.getDateTo())
-                .university(student.getUniversity())
-                .build();
         String token = jwtService.generateToken(user);
+        if(user.getRole() == Role.STUDENT){
+            Student student = user.getStudent();
+            StudentResponse studentResponse = StudentResponse.builder()
+                    .id(student.getId())
+                    .name(student.getName())
+                    .surName(student.getSurName())
+                    .faculty(student.getFaculty())
+                    .email(student.getEmail())
+                    .address(student.getAddress())
+                    .profession(student.getProfession())
+                    .telNumber(student.getTelNumber())
+                    .image(ImageUtils.getBase64Image(student.getImage()))
+                    .diploma(ImageUtils.getBase64Image(student.getDiploma()))
+                    .dateFrom(student.getDateFrom())
+                    .dateTo(student.getDateTo())
+                    .university(student.getUniversity())
+                    .build();
+            return AuthorizationResponse.builder()
+                    .accessToken(token)
+                    .roles(user.getRole())
+                    .user(studentResponse)
+                    .build();
+        }
+        else if(user.getRole() == Role.TEACHER){
+            Teacher teacher =  user.getTeacher();
+            StudentResponse studentResponse = StudentResponse.builder()
+                    .id(teacher.getId())
+                    .name(teacher.getName())
+                    .surName(teacher.getSurname())
+                    .build();
+            return AuthorizationResponse.builder()
+                    .accessToken(token)
+                    .roles(user.getRole())
+                    .user(studentResponse)
+                    .build();
+        }
+
         return AuthorizationResponse.builder()
                 .accessToken(token)
                 .roles(user.getRole())
-                .user(studentResponse)
+                .user(StudentResponse.builder().build())
                 .build();
+
     }
 
     private void sendMessage(User user, String email){

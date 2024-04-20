@@ -18,9 +18,6 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class GlobalExceptionHandler{
 
-    private final MessageSource messageSource;
-
-
     @ExceptionHandler(AuthenticationFailException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ExceptionResponse authenticationFail(AuthenticationFailException exception) {
@@ -54,18 +51,12 @@ public class GlobalExceptionHandler{
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ExceptionResponse methodArgumentNotValid(MethodArgumentNotValidException exception) {
-        FieldError fieldError = Objects.requireNonNull(exception.getFieldError());
-        String defaultMessage = fieldError.getDefaultMessage();
-        assert defaultMessage != null;
-        String localizedMessage = messageSource.getMessage(defaultMessage, null, LocaleContextHolder.getLocale());
-
-        System.out.println(exception.getClass().getSimpleName());
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse handlerMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         return ExceptionResponse.builder()
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .exceptionClassName(exception.getClass().getSimpleName())
-                .message(localizedMessage)
+                .exceptionClassName(e.getClass().getSimpleName())
+                .message(e.getMessage())
                 .build();
     }
 
