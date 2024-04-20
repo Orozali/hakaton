@@ -28,8 +28,6 @@ public class Exam {
     private LocalTime time;
     private int duration;
     @OneToOne(mappedBy = "exam", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    @RestResource(exported = false)
-    @JsonIgnore
     private ExamPaper examPaper;
     @OneToMany(mappedBy = "exam")
     @RestResource(exported = false)

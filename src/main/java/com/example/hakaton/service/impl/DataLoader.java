@@ -18,15 +18,15 @@ import java.nio.file.Path;
 @Component
 public class DataLoader implements CommandLineRunner {
 
-    private final StudentRepository studentRepository;
-    private final ApplicationRepository applicationRepository;
-    private final ResourceLoader resourceLoader;
-
-    public DataLoader(StudentRepository studentRepository, ApplicationRepository applicationRepository, ResourceLoader resourceLoader) {
-        this.studentRepository = studentRepository;
-        this.applicationRepository = applicationRepository;
-        this.resourceLoader = resourceLoader;
-    }
+//    private final StudentRepository studentRepository;
+//    private final ApplicationRepository applicationRepository;
+//    private final ResourceLoader resourceLoader;
+//
+//    public DataLoader(StudentRepository studentRepository, ApplicationRepository applicationRepository, ResourceLoader resourceLoader) {
+//        this.studentRepository = studentRepository;
+//        this.applicationRepository = applicationRepository;
+//        this.resourceLoader = resourceLoader;
+//    }
 
     @Override
     public void run(String... args) throws Exception {
@@ -63,7 +63,7 @@ public class DataLoader implements CommandLineRunner {
 //                .diplom(diplomaBytes)
 //                .build();
 //    }
-
+//
 //    private byte[] getImageBytes(String filePath) throws IOException {
 //        Resource resource = resourceLoader.getResource("classpath:" + filePath);
 //        return Files.readAllBytes(resource.getFile().toPath());
