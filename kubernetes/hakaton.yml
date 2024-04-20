@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: hakaton
-          image: "adpsorcerer/hakaton:s9"
+          image: "adpsorcerer/hakaton:s13"
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
