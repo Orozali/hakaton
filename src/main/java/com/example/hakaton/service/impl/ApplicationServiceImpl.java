@@ -12,6 +12,7 @@ import com.example.hakaton.entity.User;
 import com.example.hakaton.entity.enums.Status;
 import com.example.hakaton.exception.exceptions.MessageSendingException;
 import com.example.hakaton.exception.exceptions.NotFoundException;
+import com.example.hakaton.mapper.ModelMapper;
 import com.example.hakaton.repository.ApplicationRepository;
 import com.example.hakaton.repository.ExamRepository;
 import com.example.hakaton.service.ApplicationService;
@@ -45,14 +46,14 @@ public class ApplicationServiceImpl implements ApplicationService {
     private final JwtService jwtService;
 
     @Override
-    public List<Application> getRatings(Long examId) {
+    public List<ApplicationResponse> getRatings(Long examId) {
         Exam exam = examRepository.findById(examId).orElseThrow();
         List<Application> applications = exam.getApplications();
         applications.forEach(application -> application.setRating(
                 (short)(((application.getFormGrade().getGrade()) + (application.getExamAnswer().getExamGrade().getGrade())) / 2)
         ));
         applicationRepository.saveAll(applications);
-        return applications;
+        return applications.stream().map(application -> ModelMapper.INSTANCE.toApplicationResponse(application)).toList();
     }
 
     @Override

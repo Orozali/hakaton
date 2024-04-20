@@ -15,5 +15,5 @@ public interface ApplicationService {
     List<ApplicationResponse> getAllApplication();
 
     StudentResponse getApplicationById(Long applicationId) throws IOException;
-    List<Application> getRatings(Long examId);
+    List<ApplicationResponse> getRatings(Long examId);
 }

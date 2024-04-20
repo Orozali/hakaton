@@ -4,10 +4,8 @@ import com.example.hakaton.dto.request.ExamAnswerRequest;
 import com.example.hakaton.dto.request.ExamGradeRequest;
 import com.example.hakaton.dto.request.ExamRequest;
 import com.example.hakaton.dto.request.FormRequest;
-import com.example.hakaton.entity.Exam;
-import com.example.hakaton.entity.ExamAnswer;
-import com.example.hakaton.entity.ExamGrade;
-import com.example.hakaton.entity.Form;
+import com.example.hakaton.dto.response.ApplicationResponse;
+import com.example.hakaton.entity.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -29,4 +27,5 @@ public interface ModelMapper {
     @Mapping(source = "multipartFile", target = "image", qualifiedByName = "getBytes")
     ExamAnswer toExamAnswer(ExamAnswerRequest examAnswerRequest);
     ExamGrade toExamGrade(ExamGradeRequest examGradeRequest);
+    ApplicationResponse toApplicationResponse(Application application);
 }
