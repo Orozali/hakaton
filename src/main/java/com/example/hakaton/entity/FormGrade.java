@@ -1,16 +1,14 @@
 package com.example.hakaton.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class FormGrade {
     @Id
     @SequenceGenerator(name = "form_grade_gen", sequenceName = "form_grade_seq",

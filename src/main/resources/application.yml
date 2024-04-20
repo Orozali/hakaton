@@ -29,14 +29,14 @@ spring:
   application:
     name: hakaton
   datasource:
-#    url: jdbc:postgresql://localhost:5432/postgres
-#    driver-class-name: org.postgresql.Driver
-#    username: postgres
-#    password: Orozali2003
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: Orozali2003
+#    url: jdbc:h2:mem:testdb
+#    driverClassName: org.h2.Driver
+#    username: sa
+#    password: ''
 
 jwt:
   secret-key: 66556A586E3272357538782F4125442A472D4B6150645367566B597033733676

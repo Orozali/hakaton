@@ -37,4 +37,8 @@ public class Exam {
     @RestResource(exported = false)
     @JsonIgnore
     List<Teacher> teachers;
+    @OneToMany(mappedBy = "exam")
+    @RestResource(exported = false)
+    @JsonIgnore
+    List<Application> applications;
 }
