@@ -23,7 +23,7 @@ public class Application {
     private Long id;
     @Enumerated(EnumType.STRING)
     private Status status;
-    @ManyToOne(cascade = {REFRESH, PERSIST, MERGE, DETACH})
+    @OneToOne(cascade = ALL)
     @JoinColumn(name = "student_id")
     private Student student;
     @OneToOne(mappedBy = "application")

@@ -5,7 +5,7 @@ import com.example.hakaton.dto.request.AuthenticateRequest;
 import com.example.hakaton.dto.request.RegisterRequest;
 import com.example.hakaton.dto.response.AuthenticationResponse;
 import com.example.hakaton.dto.response.AuthorizationResponse;
-import com.example.hakaton.dto.response.UserResponse;
+import com.example.hakaton.dto.response.StudentResponse;
 import com.example.hakaton.entity.Application;
 import com.example.hakaton.entity.Student;
 import com.example.hakaton.entity.User;
@@ -24,8 +24,6 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import freemarker.template.Configuration;
-import org.mapstruct.ap.shaded.freemarker.template.TemplateException;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -110,7 +108,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 )
         );
         Student student = user.getStudent();
-        UserResponse userResponse = UserResponse.builder()
+        StudentResponse studentResponse = StudentResponse.builder()
                 .id(student.getId())
                 .name(student.getName())
                 .surName(student.getSurName())
@@ -129,7 +127,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return AuthorizationResponse.builder()
                 .accessToken(token)
                 .roles(user.getRole())
-                .user(userResponse)
+                .user(studentResponse)
                 .build();
     }
 

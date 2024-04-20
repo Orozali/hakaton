@@ -1,10 +1,9 @@
 package com.example.hakaton.dto.response;
 
-import jakarta.persistence.Column;
 import lombok.Builder;
 
 @Builder
-public record UserResponse(
+public record StudentResponse(
          Long id,
          String name,
          String surName,

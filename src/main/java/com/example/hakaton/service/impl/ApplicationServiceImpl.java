@@ -4,6 +4,7 @@ import com.example.hakaton.config.jwt.JwtService;
 import com.example.hakaton.dto.request.ApplicationRequest;
 import com.example.hakaton.dto.response.ApplicationResponse;
 import com.example.hakaton.dto.response.SimpleResponse;
+import com.example.hakaton.dto.response.StudentResponse;
 import com.example.hakaton.entity.Application;
 import com.example.hakaton.entity.Student;
 import com.example.hakaton.entity.User;
@@ -12,6 +13,7 @@ import com.example.hakaton.exception.exceptions.MessageSendingException;
 import com.example.hakaton.exception.exceptions.NotFoundException;
 import com.example.hakaton.repository.ApplicationRepository;
 import com.example.hakaton.service.ApplicationService;
+import com.example.hakaton.utils.ImageUtils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import jakarta.mail.MessagingException;
@@ -37,6 +39,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     private final ApplicationRepository applicationRepository;
     private final JavaMailSender javaMailSender;
     private final Configuration config;
+    private final JwtService jwtService;
 
 
     @Override
@@ -73,12 +76,45 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public List<ApplicationResponse> getAllApplication() {
+        User user = jwtService.getAuthenticate();
+        System.out.println(user.getRole()+"dfd");
         List<ApplicationResponse> responses = new ArrayList<>();
         applicationRepository.findAll()
                 .forEach(application ->{
-
+                    Student student = application.getStudent();
+                    var applicationResponse = ApplicationResponse.builder()
+                            .id(application.getId())
+                            .name(student.getName())
+                            .surName(student.getSurName())
+                            .email(student.getEmail())
+                            .tellNumber(student.getTelNumber())
+                            .status(application.getStatus().toString())
+                            .build();
+                    responses.add(applicationResponse);
                 });
-        return null;
+        return responses;
+    }
+
+    @Override
+    public StudentResponse getApplicationById(Long applicationId) throws IOException {
+        Application application = applicationRepository.findById(applicationId)
+                .orElseThrow(()-> new NotFoundException("Заявка не найдено!"));
+        Student student = application.getStudent();
+        return StudentResponse.builder()
+                .id(student.getId())
+                .name(student.getName())
+                .surName(student.getSurName())
+                .faculty(student.getFaculty())
+                .email(student.getEmail())
+                .address(student.getAddress())
+                .profession(student.getProfession())
+                .telNumber(student.getTelNumber())
+                .image(ImageUtils.getBase64Image(student.getImage()))
+                .diplom(ImageUtils.getBase64Image(student.getDiplom()))
+                .dateFrom(student.getDateFrom())
+                .dateTo(student.getDateTo())
+                .university(student.getUniversity())
+                .build();
     }
 
 

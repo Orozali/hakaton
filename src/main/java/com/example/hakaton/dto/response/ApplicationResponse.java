@@ -8,6 +8,7 @@ public record ApplicationResponse (
         String name,
         String surName,
         String tellNumber,
-        String email
+        String email,
+        String status
 ){
 }

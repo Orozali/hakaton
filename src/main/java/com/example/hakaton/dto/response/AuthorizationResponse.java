@@ -5,7 +5,7 @@ import lombok.Builder;
 
 @Builder
 public record AuthorizationResponse(
-        UserResponse user,
+        StudentResponse user,
         Role roles,
         String accessToken
 ) {

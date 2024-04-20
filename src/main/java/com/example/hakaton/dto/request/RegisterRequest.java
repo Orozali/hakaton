@@ -1,5 +1,6 @@
 package com.example.hakaton.dto.request;
 
+import com.example.hakaton.validation.EmailValid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +13,7 @@ public record RegisterRequest(
         @NotBlank(message = "Telephone number is required")
         @Pattern(regexp = "\\d{10}", message = "Telephone number must be 10 digits") String telNumber,
         @NotBlank(message = "This field should't be empty")
-        @Pattern(regexp = "^\\d{4}\\.\\d{5}@manas\\.edu\\.kg$", message = "Email should be in this format 1234.12345@manas.edu.kg")
+        @EmailValid(message = "Пользователь с таким адресом электронной почты уже существует!")
         String email,
         @NotBlank(message = "University is required") String university,
         @NotBlank(message = "Faculty is required") String faculty,

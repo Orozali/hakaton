@@ -10,11 +10,11 @@ INSERT INTO Teacher (id, user_id, name, surname, department_id) VALUES (nextval(
 INSERT INTO Teacher (id, user_id, name, surname, department_id) VALUES (nextval('teacher_seq'), 3, 'Asan', 'Asanov', 1);
 INSERT INTO Teacher (id, user_id, name, surname, department_id) VALUES (nextval('teacher_seq'), 4, 'Adil', 'Asanov', 1);
 
--- insert into student(date_from, date_to, id, user_id, diplom, image, address, email, faculty, name, profession, sur_name, tel_number, university)
--- VALUES ( 2020, 2025, nextval('student_seq'), 1, null, null, 'Adress', '2004.01031@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' ),
---        ( 2020, 2025, nextval('student_seq'), 2, null, null, 'Adress', '2004.01032@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' ),
---        ( 2020, 2025, nextval('student_seq'), 3, null, null, 'Adress', '2004.01033@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' ),
---        ( 2020, 2025, nextval('student_seq'), 4, null, null, 'Adress', '2004.01034@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' );
+insert into student(date_from, date_to, id, user_id, diplom, image, address, email, faculty, name, profession, sur_name, tel_number, university)
+VALUES ( 2020, 2025, nextval('student_seq'), 1, null, null, 'Adress', '2004.01031@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' ),
+       ( 2020, 2025, nextval('student_seq'), 2, null, null, 'Adress', '2004.01032@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' ),
+       ( 2020, 2025, nextval('student_seq'), 3, null, null, 'Adress', '2004.01033@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' ),
+       ( 2020, 2025, nextval('student_seq'), 4, null, null, 'Adress', '2004.01034@manas.edu.kg', 'Engineering', 'Orozali','Computer','Iliazov', '+996551553552', 'Manas' );
 
 
 
